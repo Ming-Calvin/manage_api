@@ -14,7 +14,7 @@ exports.create = (req, res) => {
   Menu.create(menu)
       // 成功后返回上传的数据
       .then(data => {
-        res.json({ date: data });
+        res.json({ data: data });
       })
       // 失败后报错
       .catch(err => {
@@ -30,7 +30,7 @@ exports.findAll = (req, res) => {
   // 无查询谈条件
   Menu.findAll()
       .then(data => {
-        res.json({ date: data });
+        res.json({ data: data });
       })
       .catch(err => {
         res.status(500).send({

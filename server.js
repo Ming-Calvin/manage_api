@@ -34,6 +34,8 @@ app.get("/", (req, res) => {
 require("./app/routes/login.routes")(app);
 // 引入菜单路由
 require("./app/routes/menu.routes")(app);
+// 引入分类管理路由
+require("./app/routes/classified.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;

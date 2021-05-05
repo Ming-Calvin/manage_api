@@ -26,5 +26,7 @@ db.sequelize = sequelize;
 db.logins = require("./login.model.js")(sequelize, Sequelize);
 // 引入菜单文件
 db.menus = require("./menu.model.js")(sequelize, Sequelize);
+// 引入分类管理文件
+db.classifieds = require("./classified.model.js")(sequelize, Sequelize);
 
 module.exports = db;

@@ -25,7 +25,7 @@ exports.create = (req, res) => {
   Login.create(login)
       // 成功后返回上传的数据
       .then(data => {
-        res.json({ date: data });
+        res.json({ data: data });
       })
       // 失败后报错
       .catch(err => {
@@ -46,7 +46,7 @@ exports.findAll = (req, res) => {
   Login.findAll({ where: condition })
       // 成功则返回查询到的信息
       .then(data => {
-        res.json({ date: data });
+        res.json({ data: data });
       })
       // 失败则不返回
       .catch(err => {
