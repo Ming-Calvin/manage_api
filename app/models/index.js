@@ -34,5 +34,7 @@ db.brands = require("./brand.model.js")(sequelize, Sequelize);
 db.specifications = require("./specification.model.js")(sequelize, Sequelize);
 // 引入商品管理文件
 db.commoditys = require("./commodity.model.js")(sequelize, Sequelize);
+// 引入订单管理文件
+db.orders = require("./order.model.js")(sequelize, Sequelize);
 
 module.exports = db;
