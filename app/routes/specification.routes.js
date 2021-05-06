@@ -9,5 +9,8 @@ module.exports = app => {
   // 查询所有的参数
   router.get("/", specifications.findAll);
 
+  // 根据id删除参数
+  router.delete("/:id", specifications.delete);
+
   app.use('/specifications', router);
 };

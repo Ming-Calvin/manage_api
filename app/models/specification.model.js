@@ -6,6 +6,9 @@ module.exports = (sequelize, Sequelize) => {
     pid: {
       type: Sequelize.INTEGER
     },
+    level: {
+      type: Sequelize.INTEGER
+    },
     enable: {
       type: Sequelize.BOOLEAN
     }

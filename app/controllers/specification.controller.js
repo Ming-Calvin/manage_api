@@ -17,6 +17,7 @@ exports.create = (req, res) => {
   const specification = {
     name: req.body.name,
     pid: req.body.pid,
+    level: req.body.level,
     enable: req.body.enable ? req.body.enable : false
   };
 
@@ -41,6 +42,24 @@ exports.findAll = (req, res) => {
   var condition = name ? { name: { [Op.like]: `%${name}%` } } : null;
 
   Specification.findAll({ where: condition })
+      .then(data => {
+        res.json({ data: data });
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+              err.message || "Some error occurred while retrieving tutorials."
+        });
+      });
+};
+
+// 根据id删除
+exports.delete = (req, res) => {
+  const id = req.params.id;
+
+  Specification.destroy({
+    where: { id: id }
+  })
       .then(data => {
         res.json({ data: data });
       })
