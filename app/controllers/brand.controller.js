@@ -56,7 +56,7 @@ exports.findAll = (req, res) => {
   const { pagenum, pagesize, cName } = req.query;
   var condition = cName ? { cName: { [Op.like]: `%${cName}%` } } : null;
 
-  const { limit, offset } = getPagination(pagenum-1, pagesize);
+  const { limit, offset } = getPagination(pagenum, pagesize);
 
   Brand.findAndCountAll({ where: condition, limit, offset  })
       .then(data => {
