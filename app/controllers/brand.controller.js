@@ -2,6 +2,21 @@ const db = require("../models");
 const Brand = db.brands;
 const Op = db.Sequelize.Op;
 
+const getPagination = (page, size) => {
+  const limit = size ? +size : 3;
+  const offset = page ? page * limit : 0;
+
+  return { limit, offset };
+};
+
+const getPagingData = (data, page, limit) => {
+  const { count: totalItems, rows: brands } = data;
+  const currentPage = page ? +page : 0;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  return { totalItems, brands, totalPages, currentPage };
+};
+
 // 创建一个新的品牌
 exports.create = (req, res) => {
   // 验证接收到 request
@@ -38,12 +53,15 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  const cName = req.query.cName;
+  const { pagenum, pagesize, cName } = req.query;
   var condition = cName ? { cName: { [Op.like]: `%${cName}%` } } : null;
 
-  Brand.findAll({ where: condition })
+  const { limit, offset } = getPagination(pagenum-1, pagesize);
+
+  Brand.findAndCountAll({ where: condition, limit, offset  })
       .then(data => {
-        res.json({ data: data });
+        const response = getPagingData(data, pagenum-1, limit);
+        res.send(response);
       })
       .catch(err => {
         res.status(500).send({
