@@ -38,6 +38,8 @@ require("./app/routes/menu.routes")(app);
 require("./app/routes/classified.routes")(app);
 // 引入品牌管理路由
 require("./app/routes/brand.routes")(app);
+// 引入参数管理路由
+require("./app/routes/specification.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
