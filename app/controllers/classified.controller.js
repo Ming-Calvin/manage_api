@@ -53,3 +53,67 @@ exports.findAll = (req, res) => {
         });
       });
 };
+
+// 删除分类
+exports.delete = (req, res) => {
+  const id = req.params.id;
+
+  Classified.destroy({
+    where: { id: id }
+  })
+      .then(num => {
+        if (num == 1) {
+          res.send({
+            message: "删除成功"
+          });
+        } else {
+          res.send({
+            message: "删除失败，没找到对应id"
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "不能删除id为" + id + "的数据"
+        });
+      });
+};
+
+// 修改分类
+exports.update = (req, res) => {
+  const id = req.params.id;
+
+  Classified.update(req.body, {
+    where: { id: id }
+  })
+      .then(num => {
+        if (num == 1) {
+          res.send({
+            message: "更新分类成功."
+          });
+        } else {
+          res.send({
+            message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found or req.body is empty!`
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error updating Tutorial with id=" + id
+        });
+      });
+};
+
+// 根据id查询分类信息
+exports.findOne = (req, res) => {
+  const id = req.params.id;
+  Classified.findByPk(id)
+      .then(data => {
+        res.json({ data: data });
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error retrieving Tutorial with id=" + id
+        });
+      });
+};
