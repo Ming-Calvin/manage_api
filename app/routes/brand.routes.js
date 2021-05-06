@@ -9,5 +9,8 @@ module.exports = app => {
   // 查询所有的品牌
   router.get("/", brands.findAll);
 
+  // 修改状态
+  router.put("/:id", brands.update);
+
   app.use('/brands', router);
 };

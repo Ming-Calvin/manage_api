@@ -70,3 +70,20 @@ exports.findAll = (req, res) => {
         });
       });
 };
+
+exports.update = (req, res) => {
+  const id = req.params.id;
+
+  Brand.update(req.body, {
+    where: { id: id }
+  })
+      // 成功则返回查询到的信息
+      .then(data => {
+        res.json({ message: '修改成功'});
+      })
+      // 失败则不返回
+      .catch(err => {
+        res.status(500).send({});
+      });
+
+};
