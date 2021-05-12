@@ -9,5 +9,17 @@ module.exports = app => {
   // 查询所有的XX
   router.get("/", orders.findAll);
 
+  // 修改状态
+  router.put("/:id", orders.update);
+
+  // 删除品牌
+  router.delete("/:id", orders.delete);
+
+  // 查询所有的XX
+  router.get("/", orders.findAll);
+
+  // 查询所有的XX
+  router.get("/ordertrue", orders.findAllOrderTrue);
+
   app.use('/orders', router);
 };

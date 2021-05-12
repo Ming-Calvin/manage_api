@@ -49,3 +49,59 @@ exports.findAll = (req, res) => {
         });
       });
 };
+
+// 修改品牌信息
+exports.update = (req, res) => {
+  const id = req.params.id;
+
+  Order.update(req.body, {
+    where: { id: id }
+  })
+      // 成功则返回查询到的信息
+      .then(data => {
+        res.json({ message: '修改成功'});
+      })
+      // 失败则不返回
+      .catch(err => {
+        res.status(500).send({});
+      });
+
+};
+
+// 删除分类
+exports.delete = (req, res) => {
+  const id = req.params.id;
+
+  Order.destroy({
+    where: { id: id }
+  })
+      .then(num => {
+        if (num == 1) {
+          res.send({
+            message: "删除成功"
+          });
+        } else {
+          res.send({
+            message: "删除失败，没找到对应id"
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "不能删除id为" + id + "的数据"
+        });
+      });
+};
+
+exports.findAllOrderTrue = (req, res) => {
+  Order.findAll({ where: { status: false } })
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+              err.message || "Some error occurred while retrieving tutorials."
+        });
+      });
+};

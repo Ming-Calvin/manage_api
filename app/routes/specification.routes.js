@@ -12,5 +12,8 @@ module.exports = app => {
   // 根据id删除参数
   router.delete("/:id", specifications.delete);
 
+  // 修改状态
+  router.put("/:id", specifications.update);
+
   app.use('/specifications', router);
 };

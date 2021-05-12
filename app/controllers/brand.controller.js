@@ -71,6 +71,7 @@ exports.findAll = (req, res) => {
       });
 };
 
+// 修改品牌信息
 exports.update = (req, res) => {
   const id = req.params.id;
 
@@ -86,4 +87,43 @@ exports.update = (req, res) => {
         res.status(500).send({});
       });
 
+};
+
+// 根据id查询品牌信息
+exports.findOne = (req, res) => {
+  const id = req.params.id;
+  Brand.findByPk(id)
+      .then(data => {
+        res.json({ data: data });
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error retrieving Tutorial with id=" + id
+        });
+      });
+};
+
+// 删除分类
+exports.delete = (req, res) => {
+  const id = req.params.id;
+
+  Brand.destroy({
+    where: { id: id }
+  })
+      .then(num => {
+        if (num == 1) {
+          res.send({
+            message: "删除成功"
+          });
+        } else {
+          res.send({
+            message: "删除失败，没找到对应id"
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "不能删除id为" + id + "的数据"
+        });
+      });
 };

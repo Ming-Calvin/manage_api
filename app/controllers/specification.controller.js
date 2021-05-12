@@ -18,7 +18,7 @@ exports.create = (req, res) => {
     name: req.body.name,
     pid: req.body.pid,
     level: req.body.level,
-    enable: req.body.enable ? req.body.enable : false
+    enable: req.body.enable ? req.body.enable : true
   };
 
   // 将用户数据保存到数据库
@@ -69,4 +69,22 @@ exports.delete = (req, res) => {
               err.message || "Some error occurred while retrieving tutorials."
         });
       });
+};
+
+// 修改品牌信息
+exports.update = (req, res) => {
+  const id = req.params.id;
+
+  Specification.update(req.body, {
+    where: { id: id }
+  })
+      // 成功则返回查询到的信息
+      .then(data => {
+        res.json({ message: '修改成功'});
+      })
+      // 失败则不返回
+      .catch(err => {
+        res.status(500).send({});
+      });
+
 };

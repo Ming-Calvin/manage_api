@@ -12,5 +12,11 @@ module.exports = app => {
   // 修改状态
   router.put("/:id", brands.update);
 
+  // 根据id查找品牌信息
+  router.get("/:id", brands.findOne);
+
+  // 删除品牌
+  router.delete("/:id", brands.delete);
+
   app.use('/brands', router);
 };

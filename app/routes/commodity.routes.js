@@ -12,5 +12,11 @@ module.exports = app => {
   // 查询所有的品牌
   router.get("/brands", commoditys.findBrand);
 
+  // 根据id删除参数
+  router.delete("/:id", commoditys.delete);
+
+  // 修改状态
+  router.put("/:id", commoditys.update);
+
   app.use('/commoditys', router);
 };
